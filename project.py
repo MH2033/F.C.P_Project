@@ -1,6 +1,6 @@
-from Report import report
 from os import system
 import time
+import signal
 
 def add():
     data = []
@@ -85,6 +85,7 @@ def main():
             input()
 
 
+signal.signal(signal.SIGINT, signal.SIG_IGN)
 database = {}
 if __name__ == "__main__":
     main()
