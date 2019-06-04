@@ -3,7 +3,7 @@ from Delete import delete
 from Edit import edit
 from Report import report
 from os import system
-import time
+
 
 def main():
     while True:
@@ -36,9 +36,6 @@ def main():
             print("Press enter to continue:")
             input()
 
-try:
-    main()
-except KeyboardInterrupt:
-    main()
-finally:
+
+if __name__ == "__main__":
     main()
