@@ -76,14 +76,16 @@ def delete():
     if len(must_del) == 0 :
         system("cls")
         print("your input was wrong!")
+        print("Press Enter to Continue...")
+        input()
         return
-
     if len(must_del) > 1:
         index = []
         system("cls")
         while counter != len(must_del):
             print(counter + 1, '.', must_del[counter], sep='')
             counter += 1
+        print("===========================")
         delete_id = input("your input was unclear pleas enter a number that show the id that you want to delete : ")
         while not delete_id.isdigit() or not (int(delete_id) < counter and 0 <int(delete_id)):
             system("cls")
@@ -96,6 +98,8 @@ def delete():
         print("House has been successfully deleted from the database.")
     else :
         print("House donot delete")
+    print("Press Enter to Continue...")
+    input()
 def edit():
     print()
 
