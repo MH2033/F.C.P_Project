@@ -5,7 +5,8 @@ import signal
 def add():
     data = []
     system('cls')
-    key = input("Please enter ID: ") #id is used as a key for dictionary
+    name = input("Please enter ID: ")
+    data.append(name)
     system('cls')
     size = input("Please enter real size: ")
     while not size.isdigit():
@@ -40,7 +41,7 @@ def add():
         system('cls')
         price = input("Wrong input! please enter in valid format: ")
     data.append(price)
-    database[key] = data
+    database.append(data)
     system('cls')
     print("House has been successfully added to the database.")
     time.sleep(1)
@@ -86,6 +87,6 @@ def main():
 
 
 signal.signal(signal.SIGINT, signal.SIG_IGN)
-database = {}
+database = []
 if __name__ == "__main__":
     main()
