@@ -49,9 +49,53 @@ def add():
 
 
 def delete():
-    print()
+    system("cls")
+    database_len = len(database)
+    counter = 0
+    must_del = []
+    while counter != database_len:
+        must_del.append(database[counter][0])
+        counter += 1
+    counter = 0
+    must_del = sorted(must_del)
+    must_del.sort(key = len,reverse=True)
+    while counter != len(must_del):
+        print(counter+1,'.',must_del[counter],sep = '')
+        counter +=1
+    counter = 0
+    print("===========================")
+    delete_id = input("pleas enter some part of the id you want to delete :")
+    must_del = []
+    index = []
+    while counter != database_len :
+        if delete_id in database[counter][0]:
+            index.append(counter)
+            must_del.append(database[counter][0])
+        counter +=1
+    counter = 0
+    if len(must_del) == 0 :
+        system("cls")
+        print("your input was wrong!")
+        return
 
-
+    if len(must_del) > 1:
+        index = []
+        system("cls")
+        while counter != len(must_del):
+            print(counter + 1, '.', must_del[counter], sep='')
+            counter += 1
+        delete_id = input("your input was unclear pleas enter a number that show the id that you want to delete : ")
+        while not delete_id.isdigit() or not (int(delete_id) < counter and 0 <int(delete_id)):
+            system("cls")
+            delete_id = input("Wrong input! please enter in valid format or range: ")
+        index.append(int(delete_id)-1)
+    system("cls")
+    print("Are you sure you want to delete",database[index[0]],"(y/n)?",)
+    if(input() == 'y'):
+        del(database[index[0]])
+        print("House has been successfully deleted from the database.")
+    else :
+        print("House donot delete")
 def edit():
     print()
 
@@ -177,6 +221,7 @@ def report():
 def main():
     while True:
         system("cls")
+        print(database)
         print("1.Add")
         print("2.Delete")
         print("3.Edit")
@@ -208,8 +253,8 @@ def main():
 signal.signal(signal.SIGINT, signal.SIG_IGN)
 database = []
 #test cases:
-database.append(["MH's House", 150, 100, 3, "rent", 1200])
+database.append(["aammad's House", 150, 100, 3, "rent", 1200])
 database.append(["Mammad's House", 250, 200, 4, "sale", 10000])
-database.append([])
+database.append(["Aammad's House", 250, 200, 4, "sale", 10000])
 if __name__ == "__main__":
     main()
