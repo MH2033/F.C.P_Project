@@ -57,7 +57,7 @@ def delete():
         must_del.append(database[counter][0])
         counter += 1
     counter = 0
-    must_del = sorted(must_del)
+    must_del = sorted(must_del, key=lambda s: s.lower())
     must_del.sort(key = len,reverse=True)
     while counter != len(must_del):
         print(counter+1,'.',must_del[counter],sep = '')
@@ -87,7 +87,7 @@ def delete():
             counter += 1
         print("===========================")
         delete_id = input("your input was unclear pleas enter a number that show the id that you want to delete : ")
-        while not delete_id.isdigit() or not (int(delete_id) < counter and 0 <int(delete_id)):
+        while not delete_id.isdigit() or not (int(delete_id) <= counter and 0 <int(delete_id)):
             system("cls")
             delete_id = input("Wrong input! please enter in valid format or range: ")
         index.append(int(delete_id)-1)
@@ -101,9 +101,73 @@ def delete():
     print("Press Enter to Continue...")
     input()
 def edit():
-    print()
-
-
+    system("cls")
+    database_len = len(database)
+    counter = 0
+    must_edit = []
+    while counter != database_len:
+        must_edit.append(database[counter][0])
+        counter += 1
+    counter = 0
+    must_edit = sorted(must_edit, key=lambda s: s.lower())
+    must_edit.sort(key=len, reverse=True)
+    while counter != len(must_edit):
+        print(counter+1,'.',must_edit[counter],sep = '')
+        counter +=1
+    counter = 0
+    print("===========================")
+    edit_id = input("pleas enter number or some part of the id you want to edit :")
+    while edit_id.isdigit() and int(edit_id) > 0 and not int(edit_id) <= len(database):
+        system("cls")
+        edit_id = input("Wrong input! please enter in valid format or range: ")
+        if not edit_id.isdigit():
+            break
+    if (edit_id.isdigit()):
+        while counter != len(database):
+            if must_edit[int(edit_id)-1] in database[counter] :
+                system("cls")
+                print("Are you sure you want to edit", database[counter], "(y/n)?", )
+                if (input() == 'y'):
+                    del(database[counter])
+                    add()
+                    return
+                else:
+                    print("donot edit")
+                    return
+            counter +=1
+    else:
+        flag = 1
+        must_edit = []
+        while counter < len (database):
+            if edit_id in database[counter][0]:
+                edit_id = str(counter+1)
+                must_edit.append(database[counter][0])
+            counter += 1
+    if flag == 1 and len(must_edit) == 0:
+        system("cls")
+        print("your input was wrong!")
+        print("Press Enter to Continue...")
+        input()
+        return
+    elif len(must_edit) > 1:
+        counter = 0
+        system("cls")
+        while counter != len(must_edit):
+            print(counter + 1, '.', must_edit[counter], sep='')
+            counter += 1
+        print("===========================")
+        edit_id = input("your input was unclear pleas enter a number that show the id that you want to edit : ")
+        while not edit_id.isdigit() or not (int(edit_id) <= counter and 0 < int(edit_id)):
+            system("cls")
+            edit_id = input("Wrong input! please enter in valid format or range: ")
+    print("Are you sure you want to edit", database[int(edit_id)-1], "(y/n)?", )
+    if (input() == 'y'):
+        del (database[int(edit_id)-1])
+        add()
+        return
+    else:
+        print("donot edit")
+        return
 def report():
     while True:
         system("cls")
