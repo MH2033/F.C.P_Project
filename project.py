@@ -227,7 +227,28 @@ def report():
             print("\nPress enter to continue...")
             input()
         elif x == '5':
-            print()
+            system("cls")
+            num_rooms = input("Enter the number of rooms: ")
+            while not num_rooms.isdigit():
+                system('cls')
+                num_rooms = input("Wrong input! please enter in valid format: ")
+            num_rooms = int(num_rooms)
+            system("cls")
+            proximity = input("Enter the proximity diameter: ")
+            while not proximity.isdigit():
+                system('cls')
+                proximity = input("Wrong input! please enter in valid format: ")
+            proximity = int(proximity)
+            system('cls')
+            print("{: >20} {: >20} {: >20} {: >20} {: >20} {: >23}".format(*header))
+            for row in database:
+                if abs(row[3] - num_rooms) <= proximity:
+                    if row[4] == 'rent' or row[4] == 'mortage' or row[4] == 'rent-mortage':
+                        print("{: >20} {: >20} {: >20} {: >20} {: >20} {: >20}$ M".format(*row))
+                    else:
+                        print("{: >20} {: >20} {: >20} {: >20} {: >20} {: >20}$".format(*row))
+            print("\nPress enter to continue...")
+            input()
         elif x == '6':
             return
         else:
