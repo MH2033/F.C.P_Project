@@ -169,7 +169,22 @@ def report():
             print("\nPress enter to continue...")
             input()
         elif x == '3':
-            edit()
+            system("cls")
+            type = input("Please enter the type of deal (rent, sale, mortage, rent-mortage): ")
+            valid_types = ("rent", "sale", "mortage", "rent-mortage")
+            while type not in valid_types:
+                system('cls')
+                type = input("Wrong input! please enter in valid format: ")
+            system("cls")
+            print("{: >20} {: >20} {: >20} {: >20} {: >20} {: >23}".format(*header))
+            for row in database:
+                if row[4] == type:
+                    if row[4] == 'rent' or row[4] == 'mortage' or row[4] == 'rent-mortage':
+                        print("{: >20} {: >20} {: >20} {: >20} {: >20} {: >20}$ M".format(*row))
+                    else:
+                        print("{: >20} {: >20} {: >20} {: >20} {: >20} {: >20}$".format(*row))
+            print("\nPress enter to continue...")
+            input()
         elif x == '4':
             system("cls")
             lower = input("Enter the lower bound: ")
@@ -225,7 +240,6 @@ def report():
 def main():
     while True:
         system("cls")
-        print(database)
         print("1.Add")
         print("2.Delete")
         print("3.Edit")
