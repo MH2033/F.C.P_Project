@@ -384,6 +384,6 @@ database.append(["Aammad's House", 250, 200, 4, "sale", 10000])
 if platform.system() == 'Windows':
     os.system('mode con: cols=135 lines=30')
 elif platform.system() == 'Linux':
-    os.system('resize -s 135 30')
+    os.system('resize -s 30 130')
 if __name__ == "__main__":
     main()
