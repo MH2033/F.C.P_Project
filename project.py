@@ -162,6 +162,7 @@ def edit():
                     print("4 - room number")
                     print("5 - status")
                     print("6 - price")
+                    print("7 - back")
                     print("===========================")
                     print("please enter number : ")
                     x = my_input()
@@ -218,6 +219,9 @@ def edit():
                             print("Wrong input! please enter in valid format: ")
                             x = my_input()
                         database[int(edit_id) - 1][5] = int(x)
+                    elif int(x) == 7:
+                        edit()
+                        return
                     print("House has been successfully edited.")
                     print("Press Enter to Continue...")
                     my_input()
@@ -230,9 +234,11 @@ def edit():
             counter +=1
     else:
         flag = 1
+        must_edit1 = []
+        must_edit1.append(edit_id)
         must_edit = []
         while counter < len (database):
-            if edit_id in database[counter][0]:
+            if must_edit1[0] in database[counter][0]:
                 edit_id = str(counter+1)
                 must_edit.append(database[counter][0])
             counter += 1
@@ -265,6 +271,7 @@ def edit():
         print("4 - room number")
         print("5 - status")
         print("6 - price")
+        print("7 - back")
         print("===========================")
         print("please enter number : ")
         x = my_input()
@@ -321,6 +328,9 @@ def edit():
                 print("Wrong input! please enter in valid format: ")
                 x = my_input()
             database[int(edit_id) - 1][5] = int(x)
+        elif int(x) == 7:
+            edit()
+            return
         print("House has been successfully edited.")
         print("Press Enter to Continue...")
         my_input()
