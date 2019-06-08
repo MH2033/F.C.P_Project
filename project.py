@@ -3,16 +3,16 @@ import time
 import signal
 
 def add():
-    data = []
+    data = [] #temporary list for storing house data
     system('cls')
     name = input("Please enter ID: ")
     data.append(name)
     system('cls')
     size = input("Please enter real size: ")
-    while not size.isdigit():
+    while not size.isdigit():#valid format checking
         system('cls')
         size = input("Wrong input! please enter in valid format: ")
-    size = int(size)
+    size = int(size) #converting string to integer
     data.append(size)
     system('cls')
     foundation_size = input("Please enter foundation size: ")
@@ -95,9 +95,10 @@ def delete():
     print("Are you sure you want to delete",database[index[0]],"(y/n)?",)
     if(input() == 'y'):
         del(database[index[0]])
+        system('cls')
         print("House has been successfully deleted from the database.")
     else :
-        print("House donot delete")
+        print("House can not be delete")
     print("Press Enter to Continue...")
     input()
 def edit():
@@ -132,7 +133,7 @@ def edit():
                     add()
                     return
                 else:
-                    print("donot edit")
+                    print("House can not be edited edit")
                     return
             counter +=1
     else:
@@ -166,8 +167,10 @@ def edit():
         add()
         return
     else:
-        print("donot edit")
+        print("House can not be edit")
         return
+
+
 def report():
     while True:
         system("cls")
@@ -179,13 +182,18 @@ def report():
         print("6. Back")
         print("===========================")
         x = input("Please enter your choice (1‐6): ")
+        #Name of each house variable to be printed in each report:
         header = ['ID', 'Size(real)', 'Size(Foundation)', 'Rooms', 'State', 'Cost(s)']
         if x == '1':
             system("cls")
+            #Dedicating 20 chracters to each field:
             print("{: >20} {: >20} {: >20} {: >20} {: >20} {: >23}".format(*header))
+            #sorting by the length of the house name
             database.sort(key=lambda y: len(y[0]))
             for row in database:
                 if row[4] == 'rent' or row[4] == 'mortage' or row[4] == 'rent-mortage':
+                    #if house is for rent or mortage print an extra 'M' indicating
+                    #that the price is per month
                     print("{: >20} {: >20} {: >20} {: >20} {: >20} {: >20}$ M".format(*row))
                 else:
                     print("{: >20} {: >20} {: >20} {: >20} {: >20} {: >20}$".format(*row))
@@ -194,7 +202,7 @@ def report():
         elif x == '2':
             system("cls")
             lower = input("Enter the lower bound: ")
-            while not lower.isdigit():
+            while not lower.isdigit(): #error handling for wrong inputs
                 system('cls')
                 lower = input("Wrong input! please enter in valid format: ")
             lower = int(lower)
@@ -217,10 +225,11 @@ def report():
                     system('cls')
                     upper = input("Wrong input! please enter in valid format: ")
                 upper = int(upper)
-            temp_db = []
+            temp_db = [] #creating a temporary database for storing desired data
             for i in database:
                 if i[2] >= lower and i[2] < upper:
                     temp_db.append(i)
+            #sorting the temporary list by the foundation size
             temp_db.sort(key=lambda y: y[2])
             temp_db.reverse()
             system('cls')
@@ -299,6 +308,9 @@ def report():
             num_rooms = int(num_rooms)
             system("cls")
             proximity = input("Enter the proximity diameter: ")
+            #considering a proximity diamater for the number of rooms
+            #so if the absoloute value of rooms of the house - num_rooms
+            #is within the proximity range it will be displayed
             while not proximity.isdigit():
                 system('cls')
                 proximity = input("Wrong input! please enter in valid format: ")
@@ -324,6 +336,7 @@ def report():
 
 def main():
     while True:
+        # clearing screen on each update
         system("cls")
         print("1.Add")
         print("2.Delete")
@@ -347,14 +360,15 @@ def main():
             if ans == 'y':
                 exit(0)
         else:
-            system('cls')
+            system('cls')#error handling for wrong input
             print("Wrong input! Please enter a number between 1-5")
             print("Press enter to continue:")
             input()
 
 
+#ignoring CTRL+C signal
 signal.signal(signal.SIGINT, signal.SIG_IGN)
-database = []
+database = [] #main database
 #test cases:
 database.append(["aammad's House", 150, 100, 3, "rent", 1200])
 database.append(["Mammad's House", 250, 200, 4, "sale", 10000])
